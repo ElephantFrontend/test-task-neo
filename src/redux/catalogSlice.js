@@ -39,6 +39,7 @@ const catalogSlice = createSlice({
 
 export const catalogReducer = catalogSlice.reducer;
 export const selectCatalog = state => state.catalog.items;
+export const selectLoading = state => state.catalog.loading;
 
 export const selectFilteredCatalog = createSelector(
     [selectCatalog, selectFilters],
