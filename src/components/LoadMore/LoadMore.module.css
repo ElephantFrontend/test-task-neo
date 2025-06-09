@@ -1,0 +1,19 @@
+.load-more {
+    display: flex;
+    justify-content: center;
+}
+
+.load-more-btn {
+    color: #101828;
+    background-color: #FFFFFF;
+    border: 1px solid #DADDE1;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    padding: 16px 32px;
+}
+
+.load-more-btn:hover {
+    border: 1px solid #D84343;
+}

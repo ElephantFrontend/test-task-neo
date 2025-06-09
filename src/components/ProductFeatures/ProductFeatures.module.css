@@ -1,0 +1,31 @@
+.product-features {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 44px 52px;
+    background-color: #F7F7F7;
+    border-radius: 10px;
+}
+
+.product-features-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 100px;
+}
+
+.product-features-details--item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: capitalize;
+    color: #101828;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 16px;
+}
+
+.product-features-details--item:last-child {
+    margin-bottom: 0;
+}

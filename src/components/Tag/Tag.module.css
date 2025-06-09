@@ -1,0 +1,19 @@
+.tag {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    background-color: #F2F4F7;
+    border-radius: 100px;
+    padding: 12px 18px;
+    color: #101828;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: capitalize;
+}
+
+.tag svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}

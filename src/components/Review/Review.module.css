@@ -1,0 +1,33 @@
+.review {
+    display: flex;
+    flex-direction: column;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.review-img {
+    background-color: #F2F4F7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 16px;
+    color: #E44848;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+}
+
+.review-name {
+    color: #101828;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 0 4px 0;
+}

@@ -1,0 +1,8 @@
+.product-rating {
+    display: flex;
+    align-items: center;
+}
+
+.product-rating svg {
+    margin-right: 4px;
+}
