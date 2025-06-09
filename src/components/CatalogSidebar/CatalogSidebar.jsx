@@ -9,14 +9,57 @@ import TwelveBox from '../../assets/bi_grid2.svg?react';
 import Van from '../../assets/bi_grid-1x2.svg?react';
 import Map from '../../assets/map.svg?react';
 import {useState} from "react";
+import {useDispatch} from "react-redux";
+import {setFilters} from "../../redux/filtersSlice.js";
+
+const equipmentFilterConfig = [
+    { icon: <Ac />, label: 'AC', id: 'AC' },
+    { icon: <Transmission />, label: 'Automatic', id: 'transmission' },
+    { icon: <Kitchen />, label: 'Kitchen', id: 'kitchen' },
+    { icon: <Tv />, label: 'TV', id: 'TV' },
+    { icon: <Bathroom />, label: 'Bathroom', id: 'bathroom' },
+];
+
+const vehicleTypeFilterConfig = [
+    { icon: <Van />, label: 'Van', id: 'panelTruck' },
+    { icon: <ForeBox />, label: 'Fully Integrated', id: 'fullyIntegrated' },
+    { icon: <TwelveBox />, label: 'Alcove', id:'alcove' },
+];
 
 function CatalogSidebar () {
-    const [value, setValue] = useState('');
+    const dispatch = useDispatch();
+    const [location, setLocation] = useState('');
+    const [vehicleType, setVehicleType] = useState('');
+    const [equipment, setEquipment] = useState([]);
 
     const handleChange = (e) => {
-        setValue(e.target.value);
-        console.log('Поле ввода:', e.target.value);
+        setLocation(e.target.value);
     };
+
+    const handleToggleEquipment = (id) => {
+        setEquipment((prev) =>
+            prev.includes(id)
+                ? prev.filter((item) => item !== id)
+                : [...prev, id]
+        );
+    };
+
+    const handleTypeClick = (selectedType) => {
+        if (vehicleType === selectedType) {
+            setVehicleType('');
+        } else {
+            setVehicleType(selectedType);
+        }
+    };
+
+    const onSaveFilters = () => {
+        dispatch(setFilters({
+            location: location,
+            type: vehicleType,
+            equipment: equipment,
+        }));
+    };
+
     return (
         <>
             <aside className={css['catalog-sidebar']}>
@@ -25,10 +68,11 @@ function CatalogSidebar () {
 
                     <div className={css['field-with-icon']}>
                         <Map/>
+
                         <input
                             type="text"
                             placeholder="City"
-                            value={value}
+                            value={location}
                             onChange={handleChange}
                         />
                     </div>
@@ -42,30 +86,18 @@ function CatalogSidebar () {
                         <hr className='divider'/>
 
                         <div className={css['catalog-sidebar-filter--items']}>
-                            <div className={css['catalog-sidebar-filter--item']}>
-                                <Ac></Ac>
-                                <span>AC</span>
-                            </div>
-
-                            <div className={css['catalog-sidebar-filter--item']}>
-                                <Transmission></Transmission>
-                                <span>Automatic</span>
-                            </div>
-
-                            <div className={css['catalog-sidebar-filter--item']}>
-                                <Kitchen></Kitchen>
-                                <span>Kitchen</span>
-                            </div>
-
-                            <div className={css['catalog-sidebar-filter--item']}>
-                                <Tv></Tv>
-                                <span>TV</span>
-                            </div>
-
-                            <div className={css['catalog-sidebar-filter--item']}>
-                                <Bathroom></Bathroom>
-                                <span>Bathroom</span>
-                            </div>
+                            {equipmentFilterConfig.map(({ icon, label, id }) => (
+                                <div
+                                    key={id}
+                                    className={`${css['catalog-sidebar-filter--item']} ${
+                                        equipment.includes(id) ? css['active'] : ''
+                                    }`}
+                                    onClick={() => handleToggleEquipment(id)}
+                                >
+                                    {icon}
+                                    <span>{label}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
@@ -74,25 +106,23 @@ function CatalogSidebar () {
                         <hr className='divider'/>
 
                         <div className={css['catalog-sidebar-filter--items']}>
-                            <div className={css['catalog-sidebar-filter--item']}>
-                                <Van></Van>
-                                <span>Van</span>
-                            </div>
-
-                            <div className={css['catalog-sidebar-filter--item']}>
-                                <ForeBox></ForeBox>
-                                <span>Fully Integrated</span>
-                            </div>
-
-                            <div className={css['catalog-sidebar-filter--item']}>
-                                <TwelveBox></TwelveBox>
-                                <span>Alcove</span>
-                            </div>
+                            {vehicleTypeFilterConfig.map(({ icon, label, id }) => (
+                                <div
+                                    key={label}
+                                    className={`${css['catalog-sidebar-filter--item']} ${
+                                        vehicleType === id ? css['active'] : ''
+                                    }`}
+                                    onClick={() => handleTypeClick(id)}
+                                >
+                                    {icon}
+                                    <span>{label}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
 
-                <button className='btn-primary'>Search</button>
+                <button className='btn-primary' onClick={onSaveFilters}>Search</button>
             </aside>
         </>
     )
