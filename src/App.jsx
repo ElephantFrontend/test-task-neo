@@ -1,15 +1,16 @@
 import HomePage from "./pages/HomePage/HomePage.jsx";
-import {Suspense, useEffect} from "react";
-import Header from "./components/Header/Header.jsx";
+import {Suspense, useEffect, lazy} from "react";
 import {Navigate, Route, Routes} from "react-router";
-import CatalogPage from "./pages/CatalogPage/CatalogPage.jsx";
-import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.jsx";
-import ProductDetailsPage from "./pages/ProductDetailsPage/ProductDetailsPage.jsx";
-import ProductFeatures from "./components/ProductFeatures/ProductFeatures.jsx";
-import ProductReviews from "./components/ProductReviews/ProductReviews.jsx";
 import {useDispatch} from "react-redux";
 import {fetchCatalog} from "./redux/catalogOps.js";
 import {Toaster} from "react-hot-toast";
+
+const Header = lazy(() => import("./components/Header/Header.jsx"));
+const CatalogPage = lazy(() => import("./pages/CatalogPage/CatalogPage.jsx"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage.jsx"));
+const ProductDetailsPage = lazy(() => import("./pages/ProductDetailsPage/ProductDetailsPage.jsx"));
+const ProductFeatures = lazy(() => import("./components/ProductFeatures/ProductFeatures.jsx"));
+const ProductReviews = lazy(() => import("./components/ProductReviews/ProductReviews.jsx"));
 
 function App() {
     const dispatch = useDispatch();
